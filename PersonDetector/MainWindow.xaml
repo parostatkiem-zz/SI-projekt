@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PersonDetector" Height="339.552" Width="649.328" AutomationProperties.Name="PersonDetectorWindow">
     <Grid>
-        
+        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="162" Margin="10,137,0,0" VerticalAlignment="Top" Width="621" AutomationProperties.Name="TextBoxInput">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
     </Grid>
 </Window>
