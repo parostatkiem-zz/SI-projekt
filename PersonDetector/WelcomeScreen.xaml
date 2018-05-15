@@ -1,0 +1,14 @@
+﻿<Window x:Class="PersonDetector.WelcomeScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonDetector"
+        mc:Ignorable="d"
+        Title="WelcomeScreen" Height="300" Width="300">
+    <Grid>
+        <Label x:Name="labelWelcomeText" Content="Witaj w programie Person Detector.&#xD;&#xA;Zostaniesz teraz podany(a) badaniu osobowości.&#xD;&#xA;Twoim zdaniem jest wpisywanie do programu&#xD;&#xA;czytanych na głos tekstów. Postaraj się zrobić to &#xD;&#xA;jak najbardziej naturalnie, nie zmieniając swoich&#xD;&#xA;nawyków pisania na potrzeby tego testu.&#xD;&#xA;Im lepiej Ci to wyjdzie, tym lepiej program będzie&#xD;&#xA;w stanie wykryć badaną osobę.&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Height="143" Width="272"/>
+        <Button x:Name="buttonStart" Content="Zaczynamy" HorizontalAlignment="Left" Margin="76,199,0,0" VerticalAlignment="Top" Width="135" Click="button_Click" Height="42"/>
+
+    </Grid>
+</Window>
