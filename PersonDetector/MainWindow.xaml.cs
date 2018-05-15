@@ -50,7 +50,7 @@ namespace PersonDetector
         }
         private void finishTest(object sender, RoutedEventArgs e)
         {
-            //TODO: 
+            //TODO: okienko zamykania
         }
     }
 }
