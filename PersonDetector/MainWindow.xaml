@@ -7,12 +7,30 @@
         mc:Ignorable="d"
         Title="PersonDetector" Height="339.552" Width="649.328" AutomationProperties.Name="PersonDetectorWindow">
     <Grid>
-        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="162" Margin="10,137,0,0" VerticalAlignment="Top" Width="621" AutomationProperties.Name="TextBoxInput">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="92*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="542*"/>
+        </Grid.ColumnDefinitions>
+        <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="162" Margin="1,137,0,0" VerticalAlignment="Top" Width="621" AutomationProperties.Name="TextBoxInput" Block.LineHeight="6" Grid.ColumnSpan="3" Grid.Column="1" FontSize="14">
+            <RichTextBox.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFE3EEFF" Offset="0"/>
+                    <GradientStop Color="#FFB1D0FD" Offset="1"/>
+                </RadialGradientBrush>
+            </RichTextBox.Background>
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run Text="Linia 1"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="Linia2"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <Label x:Name="labelSpeechNumber" Content="1&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="186,1,0,0" VerticalAlignment="Top" Height="108" Width="125" FontSize="72" FontWeight="Bold" Grid.Column="3"/>
+        <Label x:Name="labelInfoText" Content="Tekst numer&#xD;&#xA;" HorizontalAlignment="Left" Margin="1,27,0,0" VerticalAlignment="Top" Height="74" Width="287" FontSize="48" Grid.ColumnSpan="3" Grid.Column="1"/>
+        <Button x:Name="buttonNextSpeech" Content="Następny" HorizontalAlignment="Left" Margin="359,45,0,0" VerticalAlignment="Top" Width="137" FontSize="24" Height="56" Grid.Column="3" Click="buttonNextSpeech_Click"/>
     </Grid>
 </Window>
