@@ -19,14 +19,14 @@ namespace PersonDetector
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int SPEECH_AMOUNT = 4;
+       // const int SPEECH_AMOUNT = 4;
         private int currentSpeech = 1;
         private int CurrentSpeech
         {
             get { return currentSpeech; }
             set
             {
-                if(value==SPEECH_AMOUNT)
+                if(value==Config.SPEECH_AMOUNT)
                 {
                     //koniec testu
                     buttonNextSpeech.Content = "Zakończ test";
@@ -51,6 +51,9 @@ namespace PersonDetector
         private void finishTest(object sender, RoutedEventArgs e)
         {
             //TODO: okienko zamykania
+            UserEndScreen s = new UserEndScreen();
+            s.Show();
+            this.Hide();
         }
     }
 }

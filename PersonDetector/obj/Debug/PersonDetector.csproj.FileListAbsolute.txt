@@ -14,3 +14,21 @@ E:\STUDIA\SI\projekt\PersonDetector\obj\Debug\PersonDetector.pdb
 E:\STUDIA\SI\projekt\PersonDetector\bin\Debug\PersonDetector.exe.config
 E:\STUDIA\SI\projekt\PersonDetector\obj\Debug\WelcomeScreen.g.cs
 E:\STUDIA\SI\projekt\PersonDetector\obj\Debug\WelcomeScreen.baml
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\bin\Debug\PersonDetector.exe.config
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.exe
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.pdb
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\bin\Debug\PersonDetector.exe
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\bin\Debug\PersonDetector.pdb
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.csprojResolveAssemblyReference.cache
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\MainWindow.g.cs
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\WelcomeScreen.g.cs
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\App.g.cs
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector_MarkupCompile.cache
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector_MarkupCompile.lref
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\MainWindow.baml
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\WelcomeScreen.baml
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.g.resources
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.Properties.Resources.resources
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\PersonDetector.csproj.GenerateResource.Cache
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\UserEndScreen.g.cs
+C:\Prosze nie usuwac, bo nie zdam\SI-projekt\PersonDetector\obj\Debug\UserEndScreen.baml

@@ -12,6 +12,8 @@ namespace PersonDetector
     /// </summary>
     public partial class App : Application
     {
-        const int SPEECH_AMOUNT = 4;
+
+        
+      //  static UserData userData = new UserData();
     }
 }

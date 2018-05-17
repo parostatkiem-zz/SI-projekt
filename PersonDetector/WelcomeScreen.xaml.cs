@@ -25,9 +25,24 @@ namespace PersonDetector
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateName())
+            {
+               
+                textBoxNickname.BorderBrush = Brushes.Red;
+                textBoxNickname.BorderThickness = new Thickness(2);
+                return;
+            }
+            Config.userData.userName = textBoxNickname.Text;
             MainWindow m = new MainWindow();
             m.Show();
             this.Hide();
+        }
+        private bool ValidateName()
+        {
+            string name = textBoxNickname.Text;
+            if (name == string.Empty) return false;
+            if (name.Length > 25) return false;
+            return true;
         }
     }
 }
