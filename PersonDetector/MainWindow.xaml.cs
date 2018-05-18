@@ -24,7 +24,7 @@ namespace PersonDetector
        // const int SPEECH_AMOUNT = 4;
         private int currentSpeech = 1;
         private SingleInput currentInput;
-        private DispatcherTimer aTimer= new DispatcherTimer();
+        private DispatcherTimer debugTimer= new DispatcherTimer();
        
         private int CurrentSpeech
         {
@@ -47,12 +47,29 @@ namespace PersonDetector
         {
             InitializeComponent();
             CurrentSpeech = 1;
+
+            debugTimer.Tick  += new EventHandler(RefreshDebug);
+            debugTimer.Interval = TimeSpan.FromMilliseconds( Config.DEBUG_REFRESH_INTERVAL);
+            debugTimer.Start();
+
+            NewSpeech();
+
+            if(Config.IS_DEBUG_ENABLED)
+            {
+                expanderDebug.IsExpanded = true;
+            }
+            else
+            {
+                expanderDebug.IsExpanded = false;
+            }
+
+
+        }
+        private void NewSpeech()
+        {
             currentInput = new SingleInput();
-
-            aTimer.Tick  += new EventHandler(RefreshDebug);
-            aTimer.Interval = TimeSpan.FromMilliseconds( Config.DEBUG_REFRESH_INTERVAL);
-            aTimer.Start();
-
+            textBoxInput.Text = "";
+            textBoxInput.Focus();
         }
         private  void RefreshDebug(object source, EventArgs e)
         {
@@ -68,6 +85,8 @@ namespace PersonDetector
         private void buttonNextSpeech_Click(object sender, RoutedEventArgs e)
         {
             CurrentSpeech++;
+            NewSpeech();
+            
         }
         private void finishTest(object sender, RoutedEventArgs e)
         {
@@ -91,6 +110,27 @@ namespace PersonDetector
         {
             WritingAnalytics.AnalizeReadyText( currentInput, textBoxInput.Text);
             WritingAnalytics.AnalizeFreshInput(currentInput, textBoxInput.Text);
+        }
+
+        private void textBoxInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key==Key.LeftShift || e.Key == Key.RightShift)
+            {
+                WritingAnalytics.ShiftPressed(true);
+            }
+        }
+
+        private void textBoxInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+            {
+                WritingAnalytics.ShiftPressed(false);
+            }
+        }
+
+        private void textBoxInput_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBoxInput.Focus();
         }
     }
 }

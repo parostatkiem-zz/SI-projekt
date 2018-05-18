@@ -41,7 +41,7 @@
         <Label x:Name="Ldesc6" Content="avgCapitalLetterTime" Margin="130,453,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LavgCapitalLetterTime" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,453,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
         <Label x:Name="Ldesc1" Content="newLinesPerText" Margin="130,324,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <TextBox x:Name="textBoxInput"   AcceptsReturn="True" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="198" Margin="3,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="621" FontSize="16" TextChanged="textBoxInput_TextChanged">
+        <TextBox x:Name="textBoxInput"   AcceptsReturn="True" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="198" Margin="3,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="621" FontSize="16" TextChanged="textBoxInput_TextChanged" KeyDown="textBoxInput_KeyDown" KeyUp="textBoxInput_KeyUp" Loaded="textBoxInput_Loaded">
             <TextBox.Background>
                 <RadialGradientBrush >
                     <GradientStop Color="#FFE3EEFF" Offset="0"/>

@@ -45,5 +45,16 @@ namespace PersonDetector
             if (name.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0) return false;
             return true;
         }
+
+        private void textBoxNickname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                button_Click(null, null);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBoxNickname.Focus();
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace PersonDetector
         public static UserData userData = new UserData();
         public static int SPEECH_AMOUNT = 4;
         public static int DEBUG_REFRESH_INTERVAL = 200;
+        public static bool IS_DEBUG_ENABLED = false;
         // public Directory saveFilePath;
     }
 
@@ -47,14 +48,20 @@ namespace PersonDetector
         private static Stopwatch singleWordTime = new Stopwatch();
         private static int textLenAtWordStart = 0;
         private static int totalWordsCount = 0;
+        private static int totalShiftUsed = 0;
+        private static Stopwatch shiftDownTime = new Stopwatch();
         public static void AnalizeReadyText( SingleInput input, string text)
         {
             if(input==null) return;
             var textLength = Convert.ToDouble(text.Length);
-            input.newLinesPerText = Convert.ToDouble( text.Count(f => f == '\n'))/ textLength ;
 
-            if (!input.polishChars &&( text.Contains('ą') || text.Contains('ć') || text.Contains('ż') || text.Contains('ź') || text.Contains('ó') || text.Contains('ł') || text.Contains('ś')))
-                input.polishChars = true;
+            if (textLength > 0)
+                input.newLinesPerText = Convert.ToDouble(text.Count(f => f == '\n')) / textLength;
+            else
+                input.newLinesPerText = 0;
+
+            input.polishChars = Regex.Match(text, "[ĄąĆćŻżŹźÓóŁłŚś]").Success;
+
 
             input.spacesBeforePunctuation = Regex.Matches(text, " [.,?!:;]").Count;
             input.spacesAfterPunctuation = Regex.Matches(text, "[.,?!:;] ").Count;
@@ -93,10 +100,27 @@ namespace PersonDetector
                     input.avgLetterTime = output;
                     totalWordsCount++;
                 }
-
             }
 
+            if(shiftDownTime.IsRunning && Regex.Matches(lastChar.ToString(), "[A-Z!@#$%^&*()]").Count == 1)
+            {
+                shiftDownTime.Stop();
+                double output;
+                if (input.avgCapitalLetterTime != 0)
+                    output = (shiftDownTime.ElapsedMilliseconds + input.avgCapitalLetterTime * totalShiftUsed) / (totalShiftUsed + 2);
+                else
+                    output = shiftDownTime.ElapsedMilliseconds;
+                if (output > 0) //ujemna wartosc = BŁĄD (np. przez usuniecie wyrazu backspace)
+                {
+                    input.avgCapitalLetterTime = output;
+                    totalShiftUsed++;
+                }
+            }
+        }
 
+        public static void ShiftPressed(bool isDown=true)
+        {
+            shiftDownTime.Restart();
         }
     }
 
