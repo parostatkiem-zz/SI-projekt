@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Timers;
 
 namespace PersonDetector
 {
@@ -41,6 +43,10 @@ namespace PersonDetector
 
     public static class WritingAnalytics
     {
+        public static bool isWordTypedNow = false;
+        private static Stopwatch singleWordTime = new Stopwatch();
+        private static int textLenAtWordStart = 0;
+        private static int totalWordsCount = 0;
         public static void AnalizeReadyText( SingleInput input, string text)
         {
             if(input==null) return;
@@ -52,6 +58,43 @@ namespace PersonDetector
 
             input.spacesBeforePunctuation = Regex.Matches(text, " [.,?!:;]").Count;
             input.spacesAfterPunctuation = Regex.Matches(text, "[.,?!:;] ").Count;
+        }
+        public static void AnalizeFreshInput(SingleInput input, string text)
+        {
+            if (text.Length <= 2) return;
+
+            char lastChar = text[text.Length - 1];
+            char secondLastChar = text[text.Length - 2];
+            char[] lastChars = { secondLastChar, lastChar };
+            string sLastChars = new string(lastChars);
+
+            if(!isWordTypedNow && Regex.Matches(sLastChars, "[.,?!:;) ][A-z]").Count==1 )
+            {
+                //poczatek wyrazu
+                isWordTypedNow = true;
+                singleWordTime.Restart();
+                textLenAtWordStart = text.Length;
+            }
+            if (isWordTypedNow && Regex.Matches(sLastChars, "[A-z][\r.,?!:;( ]").Count == 1)
+            {
+                //koniec wyrazu
+                double output;
+                isWordTypedNow = false;
+                singleWordTime.Stop();
+                if (text.Length - textLenAtWordStart <= 2) return; //pomijamy 1 oraz 2 literowe slowa
+                
+               
+                if(input.avgLetterTime!=0)
+                 output = ((singleWordTime.ElapsedMilliseconds / (text.Length - textLenAtWordStart))+input.avgLetterTime*totalWordsCount)/(totalWordsCount+2) ;
+                else
+                   output = singleWordTime.ElapsedMilliseconds / (text.Length - textLenAtWordStart);
+                if(output>0) //ujemna wartosc = BŁĄD (np. przez usuniecie wyrazu backspace)
+                {
+                    input.avgLetterTime = output;
+                    totalWordsCount++;
+                }
+
+            }
 
 
         }

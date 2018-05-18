@@ -62,7 +62,8 @@ namespace PersonDetector
             LpolishChars.Content = currentInput.polishChars;
             LavgLetterTime.Content = currentInput.avgLetterTime;
             LavgCapitalLetterTime.Content = currentInput.avgCapitalLetterTime;
-
+            LIsWordTypedNow.Content = WritingAnalytics.isWordTypedNow;
+            
         }
         private void buttonNextSpeech_Click(object sender, RoutedEventArgs e)
         {
@@ -89,6 +90,7 @@ namespace PersonDetector
         private void textBoxInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             WritingAnalytics.AnalizeReadyText( currentInput, textBoxInput.Text);
+            WritingAnalytics.AnalizeFreshInput(currentInput, textBoxInput.Text);
         }
     }
 }

@@ -30,17 +30,17 @@
             </Grid>
         </Expander>
         <Label x:Name="LnewLinesPerText" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,324,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc2" Content="spacesAfterPunctuation" Margin="10,350,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="Ldesc2" Content="spacesAfterPunctuation" Margin="130,350,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LspacesAfterPunctuation" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,350,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc3" Content="spacesBeforePunctuation" Margin="10,376,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="Ldesc3" Content="spacesBeforePunctuation" Margin="130,376,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LspacesBeforePunctuation" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,376,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc4" Content="polishChars" Margin="10,401,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="Ldesc4" Content="polishChars" Margin="130,401,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LpolishChars" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,401,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc5" Content="avgLetterTime" Margin="10,427,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="Ldesc5" Content="avgLetterTime" Margin="130,427,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LavgLetterTime" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,427,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc6" Content="avgCapitalLetterTime" Margin="10,453,0,0" VerticalAlignment="Top" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Column="1"/>
+        <Label x:Name="Ldesc6" Content="avgCapitalLetterTime" Margin="130,453,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="LavgCapitalLetterTime" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,453,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc1" Content="newLinesPerText" Margin="10,324,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="393" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="Ldesc1" Content="newLinesPerText" Margin="130,324,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
         <TextBox x:Name="textBoxInput"   AcceptsReturn="True" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="198" Margin="3,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="621" FontSize="16" TextChanged="textBoxInput_TextChanged">
             <TextBox.Background>
                 <RadialGradientBrush >
@@ -49,5 +49,7 @@
                 </RadialGradientBrush>
             </TextBox.Background>
         </TextBox>
+        <Label x:Name="LIsWordTypedNow" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="49,453,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Lparam7" Content="isWordTypedNow" Grid.Column="1" HorizontalAlignment="Left" Margin="1,453,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="135" FontWeight="Bold" HorizontalContentAlignment="Right"/>
     </Grid>
 </Window>
