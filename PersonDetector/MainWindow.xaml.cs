@@ -84,6 +84,8 @@ namespace PersonDetector
         }
         private void buttonNextSpeech_Click(object sender, RoutedEventArgs e)
         {
+            if (currentInput != null)
+                Config.userData.inputs.Add(currentInput);
             CurrentSpeech++;
             NewSpeech();
             
@@ -91,6 +93,8 @@ namespace PersonDetector
         private void finishTest(object sender, RoutedEventArgs e)
         {
             //TODO: okienko zamykania
+            if (currentInput != null)
+                Config.userData.inputs.Add(currentInput);
             UserEndScreen s = new UserEndScreen();
             s.Show();
             this.Hide();

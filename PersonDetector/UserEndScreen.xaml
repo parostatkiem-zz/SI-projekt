@@ -8,7 +8,7 @@
         Title="UserEndScreen" Height="309.611" Width="327.46" Closed="Window_Closed">
     <Grid>
         <Label x:Name="label" Content="Udało Ci się zakończyć wprowadzanie danych.&#xD;&#xA;Program stworzył plik nazwany Twoim imieniem,&#xD;&#xA;który należy dostarczyć zarządzającym projektem w &#xD;&#xA;umówiony sposób. &#xD;&#xA;&#xD;&#xA;Dziękujemy za udział w badaniu." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="113" Width="299"/>
-        <Button x:Name="btnOpenFolder" Content="Otwórz lokalizację pliku" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="299" Height="47">
+        <Button x:Name="btnOpenFolder" Content="Otwórz lokalizację pliku" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="299" Height="47" Click="btnOpenFolder_Click">
             <Button.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0.383"/>

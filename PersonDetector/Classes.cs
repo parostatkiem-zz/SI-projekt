@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Timers;
 
+using Newtonsoft.Json;
+
 namespace PersonDetector
 {
 
@@ -36,10 +38,18 @@ namespace PersonDetector
     public static class Config
     {
         public static UserData userData = new UserData();
-        public static int SPEECH_AMOUNT = 4;
+        public static int SPEECH_AMOUNT = 2;
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
-        // public Directory saveFilePath;
+        public static DirectoryInfo saveFileDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"); //pulpit
+        public static string SavePath
+        {
+            get
+            {
+                return Config.saveFileDir + Config.userData.userName + ".json";
+            }
+
+        }
     }
 
     public static class WritingAnalytics
@@ -121,6 +131,24 @@ namespace PersonDetector
         public static void ShiftPressed(bool isDown=true)
         {
             shiftDownTime.Restart();
+        }
+    }
+
+    public static class IOoperations
+    {
+        
+        public static bool SerializeToJson()
+        {
+            try
+            {
+              using (StreamWriter sw = new StreamWriter(Config.SavePath))
+                { 
+                    sw.Write(JsonConvert.SerializeObject(Config.userData));
+                }
+
+            }
+            catch { return false; }
+            return true;
         }
     }
 
