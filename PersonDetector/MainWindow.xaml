@@ -21,7 +21,7 @@
         <Label x:Name="labelSpeechNumber" Content="1&#xA;&#xA;" HorizontalAlignment="Left" Margin="186,1,0,0" VerticalAlignment="Top" Height="108" Width="125" FontSize="72" FontWeight="Bold" Grid.Column="3"/>
         <Label x:Name="labelInfoText" Content="Tekst numer&#xA;" HorizontalAlignment="Left" Margin="1,27,0,0" VerticalAlignment="Top" Height="74" Width="287" FontSize="48" Grid.ColumnSpan="3" Grid.Column="1"/>
         <Button x:Name="buttonNextSpeech" Content="Następny" HorizontalAlignment="Left" Margin="1.831,45,0,0" VerticalAlignment="Top" Width="137" FontSize="24" Height="56" Grid.Column="4" Click="buttonNextSpeech_Click"/>
-        <Expander x:Name="expanderDebug" Grid.Column="1" Header="DebugInfo" Margin="10,304,342,0" VerticalAlignment="Top" Expanded="expanderDebug_Expanded" Collapsed="expanderDebug_Collapsed" IsExpanded="True" Grid.ColumnSpan="3">
+        <Expander x:Name="expanderDebug" Grid.Column="1" Header="DebugInfo" Margin="10,304,0,0" VerticalAlignment="Top" Expanded="expanderDebug_Expanded" Collapsed="expanderDebug_Collapsed" IsExpanded="True" Height="28" Opacity="0.4" BorderThickness="0,1,1,1" FontSize="10">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="23*"/>

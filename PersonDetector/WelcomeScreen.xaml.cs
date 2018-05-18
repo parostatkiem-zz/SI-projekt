@@ -42,6 +42,7 @@ namespace PersonDetector
             string name = textBoxNickname.Text;
             if (name == string.Empty) return false;
             if (name.Length > 25) return false;
+            if (name.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0) return false;
             return true;
         }
     }
