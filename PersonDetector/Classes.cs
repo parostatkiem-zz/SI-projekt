@@ -34,7 +34,8 @@ namespace PersonDetector
     {
         public static UserData userData = new UserData();
         public static int SPEECH_AMOUNT = 4;
-       // public Directory saveFilePath;
+        public static int DEBUG_REFRESH_INTERVAL = 200;
+        // public Directory saveFilePath;
     }
 
     
