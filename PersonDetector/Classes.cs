@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PersonDetector
 {
@@ -38,8 +39,27 @@ namespace PersonDetector
         // public Directory saveFilePath;
     }
 
-    
-    
+    public static class WritingAnalytics
+    {
+        public static void AnalizeReadyText( SingleInput input, string text)
+        {
+            if(input==null) return;
+            var textLength = Convert.ToDouble(text.Length);
+            input.newLinesPerText = Convert.ToDouble( text.Count(f => f == '\n'))/ textLength ;
 
-  
+            if (!input.polishChars &&( text.Contains('ą') || text.Contains('ć') || text.Contains('ż') || text.Contains('ź') || text.Contains('ó') || text.Contains('ł') || text.Contains('ś')))
+                input.polishChars = true;
+
+            input.spacesBeforePunctuation = Regex.Matches(text, " [.,?!:;]").Count;
+            input.spacesAfterPunctuation = Regex.Matches(text, "[.,?!:;] ").Count;
+
+
+        }
+    }
+
+
+
+
+
+
 }

@@ -40,7 +40,7 @@ namespace PersonDetector
                 }
                 currentSpeech = value;
                 labelSpeechNumber.Content = value;
-               richTextBox.Document.Blocks.Clear();
+              // richTextBox.Document.Blocks.Clear();
             }
         }
         public MainWindow()
@@ -84,6 +84,11 @@ namespace PersonDetector
         private void expanderDebug_Collapsed(object sender, RoutedEventArgs e)
         {
             MainWindowForm.Height = 365;
+        }
+
+        private void textBoxInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WritingAnalytics.AnalizeReadyText( currentInput, textBoxInput.Text);
         }
     }
 }
