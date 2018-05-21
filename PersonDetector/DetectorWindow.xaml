@@ -18,6 +18,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Label x:Name="lDesc1" Content="Poprawnie załadowane zestawy: " HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc2" Content="Błędnie załadowane zestawy: " HorizontalAlignment="Left" Margin="26,130,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lLoadedSets" Content="0" HorizontalAlignment="Left" Margin="183,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lNotLoadedSets" Content="0" HorizontalAlignment="Left" Margin="183,130,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

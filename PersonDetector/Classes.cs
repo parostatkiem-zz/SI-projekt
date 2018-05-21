@@ -146,9 +146,10 @@ namespace PersonDetector
             {
                 UserData data = JsonConvert.DeserializeObject<UserData>(File.ReadAllText(file.FullName));
                 Config.allUsersData.Add(data);
+                Config.parsedFiles++;
                 return true;
             }
-            catch { return false; }
+            catch { Config.unParsedFiles++; return false; }
 
         }
     }
@@ -172,7 +173,9 @@ namespace PersonDetector
         public static bool ReadFilesFrom(string path)
         {
             if (!System.IO.Directory.Exists(path)) return false;
-            
+
+            Config.parsedFiles = 0;
+            Config.unParsedFiles = 0;
             DirectoryInfo d = new DirectoryInfo(path);
 
             foreach (var file in d.GetFiles("*.json"))

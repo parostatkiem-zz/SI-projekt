@@ -36,6 +36,9 @@ namespace PersonDetector
             {
                path = dialog.SelectedPath;
                IOoperations.ReadFilesFrom(path);
+                lLoadedSets.Content = Config.parsedFiles;
+                lNotLoadedSets.Content = Config.unParsedFiles;
+
             }
             else
                 return;
