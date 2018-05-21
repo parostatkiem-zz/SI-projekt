@@ -32,7 +32,7 @@ namespace PersonDetector
                 textBoxNickname.BorderThickness = new Thickness(2);
                 return;
             }
-            Config.userData.userName = textBoxNickname.Text;
+            Config.currentUserData.userName = textBoxNickname.Text;
             MainWindow m = new MainWindow();
             m.Show();
             this.Hide();
@@ -55,6 +55,18 @@ namespace PersonDetector
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             textBoxNickname.Focus();
+        }
+
+    
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key==Key.L)
+            {
+                DetectorWindow m = new DetectorWindow();
+                m.Show();
+                this.Hide();
+            }
         }
     }
 }

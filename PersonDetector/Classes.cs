@@ -37,7 +37,8 @@ namespace PersonDetector
 
     public static class Config
     {
-        public static UserData userData = new UserData();
+        public static List<UserData> allUsersData = new List<UserData>();
+        public static UserData currentUserData = new UserData();
         public static int SPEECH_AMOUNT = 2;
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
@@ -46,10 +47,13 @@ namespace PersonDetector
         {
             get
             {
-                return Config.saveFileDir + Config.userData.userName + ".json";
+                return saveFileDir + currentUserData.userName + ".json";
             }
 
         }
+
+        public static int parsedFiles = 0;
+        public static int unParsedFiles = 0;
     }
 
     public static class WritingAnalytics
@@ -134,6 +138,21 @@ namespace PersonDetector
         }
     }
 
+    public static class DataAnalytics
+    {
+        public static bool ParseSingleFile(FileInfo file)
+        {
+            try
+            {
+                UserData data = JsonConvert.DeserializeObject<UserData>(File.ReadAllText(file.FullName));
+                Config.allUsersData.Add(data);
+                return true;
+            }
+            catch { return false; }
+
+        }
+    }
+
     public static class IOoperations
     {
         
@@ -143,11 +162,23 @@ namespace PersonDetector
             {
               using (StreamWriter sw = new StreamWriter(Config.SavePath))
                 { 
-                    sw.Write(JsonConvert.SerializeObject(Config.userData));
+                    sw.Write(JsonConvert.SerializeObject(Config.currentUserData));
                 }
 
             }
             catch { return false; }
+            return true;
+        }
+        public static bool ReadFilesFrom(string path)
+        {
+            if (!System.IO.Directory.Exists(path)) return false;
+            
+            DirectoryInfo d = new DirectoryInfo(path);
+
+            foreach (var file in d.GetFiles("*.json"))
+            {
+                DataAnalytics.ParseSingleFile(file);
+            }
             return true;
         }
     }
