@@ -46,5 +46,10 @@ namespace PersonDetector
 
         }
 
+        private void btnDoFinalTest_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow m = new MainWindow(true);
+            m.Show();
+        }
     }
 }

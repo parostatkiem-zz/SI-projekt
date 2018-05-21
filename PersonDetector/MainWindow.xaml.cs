@@ -43,7 +43,7 @@ namespace PersonDetector
               // richTextBox.Document.Blocks.Clear();
             }
         }
-        public MainWindow()
+        public MainWindow(bool final=false)
         {
             InitializeComponent();
             CurrentSpeech = 1;
@@ -61,6 +61,13 @@ namespace PersonDetector
             else
             {
                 expanderDebug.IsExpanded = false;
+            }
+            if(final)
+            {
+                Config.currentUserData.userName = "FINAL";
+                Config.SPEECH_AMOUNT = 1;
+                labelInfoText.Content = "Tekst końcowy";
+                labelSpeechNumber.Visibility = Visibility.Hidden;
             }
 
 
