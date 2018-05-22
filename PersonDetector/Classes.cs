@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Timers;
 
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace PersonDetector
 {
@@ -18,9 +19,68 @@ namespace PersonDetector
         public double newLinesPerText; //ilosc enterów na długość tekstu
         public double spacesAfterPunctuation; //spacje po znakach przestankowych
         public double spacesBeforePunctuation; //spacje przed znakami przestankowymi
-        public bool polishChars; //uzycie polskich znakow
+        public double polishChars; //uzycie polskich znakow
         public double avgLetterTime; //średni czas pisania jednej litery w słowie
         public double avgCapitalLetterTime; //średni czas wciśnięcia klawisza z literką po SHIFT
+
+        public double this[int index]
+        {
+            get
+            {
+                switch(index)
+                {
+                    case 0:
+                        return newLinesPerText;
+                      
+                    case 1:
+                        return spacesAfterPunctuation;
+                        
+                    case 2:
+                        return spacesBeforePunctuation;
+                       
+                    case 3:
+                        return polishChars;
+                        
+                    case 4:
+                        return avgLetterTime;
+                        
+                    case 5:
+                        return avgCapitalLetterTime;
+                      
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0:
+                        newLinesPerText=value;
+                        break;
+                    case 1:
+                        spacesAfterPunctuation = value;
+                        break;
+                    case 2:
+                        spacesBeforePunctuation = value;
+                        break;
+                    case 3:
+                        polishChars = value;
+                        break;
+                    case 4:
+                        avgLetterTime = value;
+                        break;
+                     case 5:
+                        avgCapitalLetterTime = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+
+
     }
 
     public class UserData
@@ -33,13 +93,37 @@ namespace PersonDetector
             userName = _userName;
             inputs = new List<SingleInput>();
         }
+        public UserData GetNormalizedForm()
+        {
+            var normalzed = new UserData();
+            normalzed.userName = this.userName;
+            SingleInput avg = new SingleInput();
+            int itemNum = inputs.Count();
+
+            for(int i=0; i<6;i++)
+            {
+                //foreach param
+                var bottom= inputs.Max(inp => inp[i]) - inputs.Min(inp => inp[i]);
+                if (bottom > 0)
+                {
+                    var top = inputs.Sum(inp => inp[i]) / itemNum - inputs.Min(inp => inp[i]);
+                    avg[i] = top / bottom;
+                 }
+                else
+                    avg[i] = 0;
+             }
+            normalzed.inputs.Add(avg);
+            // normalized
+            return normalzed;
+        }
     }
 
     public static class Config
     {
         public static List<UserData> allUsersData = new List<UserData>();
+        public static List<UserData> allUsersNormalized = new List<UserData>();
         public static UserData currentUserData = new UserData();
-        public static int SPEECH_AMOUNT = 2;
+        public static int SPEECH_AMOUNT = 3;
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
         public static DirectoryInfo saveFileDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"); //pulpit
@@ -74,7 +158,7 @@ namespace PersonDetector
             else
                 input.newLinesPerText = 0;
 
-            input.polishChars = Regex.Match(text, "[ĄąĆćŻżŹźÓóŁłŚś]").Success;
+            input.polishChars =Convert.ToInt16( Regex.Match(text, "[ĄąĆćŻżŹźÓóŁłŚś]").Success);
 
 
             input.spacesBeforePunctuation = Regex.Matches(text, " [.,?!:;]").Count;
@@ -151,6 +235,15 @@ namespace PersonDetector
             }
             catch { Config.unParsedFiles++; return false; }
 
+        }
+
+        public static void NormalizeData()
+        {
+            Config.allUsersNormalized.Clear();
+            foreach(UserData data in Config.allUsersData)
+            {
+                Config.allUsersNormalized.Add(data.GetNormalizedForm());
+            }
         }
     }
 

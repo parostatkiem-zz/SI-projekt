@@ -63,5 +63,10 @@ namespace PersonDetector
         {
             RefreshDebug();
         }
+
+        private void btnDoMagic_Click(object sender, RoutedEventArgs e)
+        {
+            DataAnalytics.NormalizeData();
+        }
     }
 }
