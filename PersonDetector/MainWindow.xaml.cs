@@ -31,7 +31,7 @@ namespace PersonDetector
             get { return currentSpeech; }
             set
             {
-                if(value==Config.SPEECH_AMOUNT)
+                if(value>=Config.SPEECH_AMOUNT)
                 {
                     //koniec testu
                     buttonNextSpeech.Content = "Zakończ test";
@@ -46,7 +46,7 @@ namespace PersonDetector
         public MainWindow(bool final=false)
         {
             InitializeComponent();
-            CurrentSpeech = 1;
+            
 
             debugTimer.Tick  += new EventHandler(RefreshDebug);
             debugTimer.Interval = TimeSpan.FromMilliseconds( Config.DEBUG_REFRESH_INTERVAL);
@@ -62,14 +62,19 @@ namespace PersonDetector
             {
                 expanderDebug.IsExpanded = false;
             }
-            if(final)
+            CurrentSpeech = 1;
+            if (final)
             {
                 Config.currentUserData.userName = "FINAL";
                 Config.SPEECH_AMOUNT = 1;
+                CurrentSpeech = 1; //musi być drugi raz
                 labelInfoText.Content = "Tekst końcowy";
                 labelSpeechNumber.Visibility = Visibility.Hidden;
+                buttonNextSpeech.Click -= finishTest;
+                buttonNextSpeech.Click -= buttonNextSpeech_Click;
+                buttonNextSpeech.Click += EndFinalTest;
             }
-
+         
 
         }
         private void NewSpeech()
@@ -143,5 +148,16 @@ namespace PersonDetector
         {
             textBoxInput.Focus();
         }
-    }
+        private void EndFinalTest(object o, EventArgs e)
+        {
+            if (currentInput != null)
+            { 
+                Config.currentUserData.inputs.Add(currentInput);
+                Config.allUsersData.Add(Config.currentUserData);
+            }
+
+            this.Close();
+        }
+    
+}
 }

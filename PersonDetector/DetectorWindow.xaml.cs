@@ -24,6 +24,7 @@ namespace PersonDetector
         public DetectorWindow()
         {
             InitializeComponent();
+            RefreshDebug();
         }
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
@@ -36,8 +37,7 @@ namespace PersonDetector
             {
                path = dialog.SelectedPath;
                IOoperations.ReadFilesFrom(path);
-                lLoadedSets.Content = Config.parsedFiles;
-                lNotLoadedSets.Content = Config.unParsedFiles;
+                RefreshDebug();
 
             }
             else
@@ -50,6 +50,18 @@ namespace PersonDetector
         {
             MainWindow m = new MainWindow(true);
             m.Show();
+            m.Closed += M_Closed;
+        }
+        private void RefreshDebug()
+        {
+            lFinalTestDone.Content = (Config.allUsersData.Where(p => p.userName == "FINAL").Count() > 0).ToString();
+            lLoadedSets.Content = Config.parsedFiles;
+            lNotLoadedSets.Content = Config.unParsedFiles;
+
+        }
+        private void M_Closed(object sender, EventArgs e)
+        {
+            RefreshDebug();
         }
     }
 }
