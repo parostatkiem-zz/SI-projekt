@@ -78,9 +78,6 @@ namespace PersonDetector
                 }
             }
         }
-
-
-
     }
 
     public class UserData
@@ -133,7 +130,6 @@ namespace PersonDetector
             {
                 return saveFileDir + currentUserData.userName + ".json";
             }
-
         }
 
         public static int parsedFiles = 0;
@@ -243,6 +239,38 @@ namespace PersonDetector
             foreach(UserData data in Config.allUsersData)
             {
                 Config.allUsersNormalized.Add(data.GetNormalizedForm());
+            }
+            NormalizeAmongAllUsers();
+            foreach (UserData data in Config.allUsersNormalized)
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(data.inputs[0]));
+            }
+               
+        }
+
+        private static void NormalizeAmongAllUsers()
+        {
+            double[] max = new double[6];
+            double[] min = { 1, 1, 1, 1, 1, 1 };
+
+            foreach (UserData data in Config.allUsersNormalized)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    //foreach param
+                    if (max[i] < data.inputs[0][i])
+                        max[i] = data.inputs[0][i];
+                    if (min[i] > data.inputs[0][i])
+                        min[i] = data.inputs[0][i];
+                }
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                //foreach param
+               foreach (UserData data in Config.allUsersNormalized)
+                {
+                    data.inputs[0][i] = (data.inputs[0][i] - min[i] )/ (max[i] - min[i]);
+                }
             }
         }
     }
