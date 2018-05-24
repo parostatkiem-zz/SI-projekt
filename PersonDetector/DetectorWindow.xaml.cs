@@ -21,10 +21,13 @@ namespace PersonDetector
     /// </summary>
     public partial class DetectorWindow : Window
     {
+        private bool weightsFileLoaded = false;
         public DetectorWindow()
         {
             InitializeComponent();
+            weightsFileLoaded = IOoperations.ReadWeightsFrom(Config.weightsFilePath);
             RefreshDebug();
+
         }
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
@@ -57,7 +60,7 @@ namespace PersonDetector
             lFinalTestDone.Content = (Config.allUsersData.Where(p => p.userName == "FINAL").Count() > 0).ToString();
             lLoadedSets.Content = Config.parsedFiles;
             lNotLoadedSets.Content = Config.unParsedFiles;
-
+            lWeightsLoaded.Content = weightsFileLoaded;
         }
         private void M_Closed(object sender, EventArgs e)
         {

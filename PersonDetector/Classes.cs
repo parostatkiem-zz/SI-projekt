@@ -124,6 +124,8 @@ namespace PersonDetector
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
         public static DirectoryInfo saveFileDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"); //pulpit
+        public static string weightsFilePath = "classifier_data.json";
+
         public static string SavePath
         {
             get
@@ -304,6 +306,29 @@ namespace PersonDetector
                 DataAnalytics.ParseSingleFile(file);
             }
             return true;
+        }
+
+        public static bool ReadWeightsFrom(string pathToFile)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(pathToFile)) return false;
+                SudczakClassifier.weights = JsonConvert.DeserializeObject<double[]>(File.ReadAllText(pathToFile));
+                return true;
+            }
+            catch { return false; }
+        }
+    }
+
+
+    public static class SudczakClassifier
+    {
+        public static double[] weights = { 1, 1, 1, 1, 1, 1 };
+        public static double GetProbabilityAmong(double[] itemParams, double[] perfectParams )
+        {
+            
+            //TODO
+            return 0;
         }
     }
 

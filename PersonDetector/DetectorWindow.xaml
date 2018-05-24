@@ -18,12 +18,14 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="lDesc1" Content="Poprawnie załadowane zestawy: " HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lDesc2" Content="Błędnie załadowane zestawy: " HorizontalAlignment="Left" Margin="26,130,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lLoadedSets" Content="0" HorizontalAlignment="Left" Margin="183,99,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lNotLoadedSets" Content="0" HorizontalAlignment="Left" Margin="183,130,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lDesc3" Content="Test końcowy wykonany:" HorizontalAlignment="Left" Margin="48,157,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lFinalTestDone" Content="Nie" HorizontalAlignment="Left" Margin="184,157,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc1" Content="Poprawnie załadowane zestawy: " HorizontalAlignment="Left" Margin="73,108,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc2" Content="Błędnie załadowane zestawy: " HorizontalAlignment="Left" Margin="89,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lLoadedSets" Content="0" HorizontalAlignment="Left" Margin="246,108,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lNotLoadedSets" Content="0" HorizontalAlignment="Left" Margin="246,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc3" Content="Test końcowy wykonany:" HorizontalAlignment="Left" Margin="111,166,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lFinalTestDone" Content="Nie" HorizontalAlignment="Left" Margin="247,166,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc4" Content="Plik z danymi klasyfikatora załadowany:" HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lWeightsLoaded" Content="Nie" HorizontalAlignment="Left" Margin="247,192,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
