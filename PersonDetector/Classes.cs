@@ -84,34 +84,15 @@ namespace PersonDetector
     {
         public List<SingleInput> inputs;
         public string userName;
-
+        public double probability;
         public UserData(string _userName = "")
         {
             userName = _userName;
             inputs = new List<SingleInput>();
         }
-        public UserData GetNormalizedForm()
+        public double GetAvgParam(int index)
         {
-            var normalzed = new UserData();
-            normalzed.userName = this.userName;
-            SingleInput avg = new SingleInput();
-            int itemNum = inputs.Count();
-
-            for(int i=0; i<6;i++)
-            {
-                //foreach param
-                var bottom= inputs.Max(inp => inp[i]) - inputs.Min(inp => inp[i]);
-                if (bottom > 0)
-                {
-                    var top = inputs.Sum(inp => inp[i]) / itemNum - inputs.Min(inp => inp[i]);
-                    avg[i] = top / bottom;
-                 }
-                else
-                    avg[i] = 0;
-             }
-            normalzed.inputs.Add(avg);
-            // normalized
-            return normalzed;
+            return inputs.Average(i => i[index]);
         }
     }
 
@@ -119,6 +100,8 @@ namespace PersonDetector
     {
         public static List<UserData> allUsersData = new List<UserData>();
         public static List<UserData> allUsersNormalized = new List<UserData>();
+        public static List<UserData> allUsersClassified = new List<UserData>();
+        public static List<UserData> allUsersFinal = new List<UserData>();
         public static UserData currentUserData = new UserData();
         public static int SPEECH_AMOUNT = 3;
         public static int DEBUG_REFRESH_INTERVAL = 200;
@@ -158,9 +141,11 @@ namespace PersonDetector
 
             input.polishChars =Convert.ToInt16( Regex.Match(text, "[ĄąĆćŻżŹźÓóŁłŚś]").Success);
 
-
-            input.spacesBeforePunctuation = Regex.Matches(text, " [.,?!:;]").Count;
-            input.spacesAfterPunctuation = Regex.Matches(text, "[.,?!:;] ").Count;
+            if (Regex.Matches(text, "[.,?!:;]").Count > 0) //there are any punctuations
+            {
+                input.spacesBeforePunctuation = Convert.ToDouble(Regex.Matches(text, " [.,?!:;]").Count) / Convert.ToDouble(Regex.Matches(text, "[.,?!:;]").Count);
+                input.spacesAfterPunctuation = Convert.ToDouble(Regex.Matches(text, "[.,?!:;] ").Count) / Convert.ToDouble(Regex.Matches(text, "[.,?!:;]").Count);
+            }
         }
         public static void AnalizeFreshInput(SingleInput input, string text)
         {
@@ -240,40 +225,58 @@ namespace PersonDetector
             Config.allUsersNormalized.Clear();
             foreach(UserData data in Config.allUsersData)
             {
-                Config.allUsersNormalized.Add(data.GetNormalizedForm());
+              //  Config.allUsersNormalized.Add(data.GetNormalizedForm());
             }
             NormalizeAmongAllUsers();
+
+            //debug:
             foreach (UserData data in Config.allUsersNormalized)
             {
-                Console.WriteLine(JsonConvert.SerializeObject(data.inputs[0]));
+                Console.WriteLine(data.userName+": "+JsonConvert.SerializeObject(data.inputs[0]));
             }
                
         }
 
         private static void NormalizeAmongAllUsers()
         {
+
             double[] max = new double[6];
             double[] min = { 1, 1, 1, 1, 1, 1 };
 
-            foreach (UserData data in Config.allUsersNormalized)
+            foreach (UserData data in Config.allUsersData)
             {
                 for (int i = 0; i < 6; i++)
                 {
                     //foreach param
-                    if (max[i] < data.inputs[0][i])
-                        max[i] = data.inputs[0][i];
-                    if (min[i] > data.inputs[0][i])
-                        min[i] = data.inputs[0][i];
+                    if (max[i] < data.inputs.Max(s => s[i]))
+                        max[i] = data.inputs.Max(s => s[i]);
+                    if (min[i] > data.inputs.Min(s => s[i]))
+                        min[i] = data.inputs.Min(s => s[i]);
                 }
             }
-            for (int i = 0; i < 6; i++)
+
+            UserData tmp;
+            SingleInput inp;
+            foreach (UserData data in Config.allUsersData)
             {
-                //foreach param
-               foreach (UserData data in Config.allUsersNormalized)
+                tmp = new UserData();
+                tmp.userName = data.userName;
+                inp = new SingleInput();
+
+                for (int i = 0; i < 6; i++)
                 {
-                    data.inputs[0][i] = (data.inputs[0][i] - min[i] )/ (max[i] - min[i]);
+                    //foreach param
+                    if ((max[i] - min[i])==0)
+                    {
+                        inp[i] = data.GetAvgParam(i);
+                        continue;
+                    }
+                    
+                   inp[i] = (data.GetAvgParam(i) - min[i]) / (max[i] - min[i]);
                 }
-            }
+                tmp.inputs.Add(inp);
+                Config.allUsersNormalized.Add(tmp);
+            } 
         }
     }
 
@@ -324,11 +327,42 @@ namespace PersonDetector
     public static class SudczakClassifier
     {
         public static double[] weights = { 1, 1, 1, 1, 1, 1 };
-        public static double GetProbabilityAmong(double[] itemParams, double[] perfectParams )
+        
+
+        public static void Classify(List<UserData> source, List<UserData> dest, string nameOfExcluded )
         {
-            
-            //TODO
-            return 0;
+            UserData tmp;
+            dest.Clear();
+            foreach(UserData data in source)
+            {
+                if (data.userName == nameOfExcluded)
+                    continue;
+                tmp = new UserData();
+                tmp.userName = data.userName;
+
+                UserData t = source.First(item => item.userName == nameOfExcluded);
+                tmp.probability=GetProbabilityAmong(data.inputs[0], t.inputs[0]);
+                dest.Add(tmp);
+
+            }
+
+            //debug:
+           //*
+            foreach(UserData d in dest)
+            {
+                Console.WriteLine(d.userName + ": " + d.probability);
+            }
+            //*/
+        }
+        private static double GetProbabilityAmong(SingleInput itemParams, SingleInput perfectParams)
+        {
+            double sum = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                //foreach param
+                sum += Math.Abs(itemParams[i] - perfectParams[i]) * weights[i];
+            }
+            return 1- (sum / weights.Sum());
         }
     }
 

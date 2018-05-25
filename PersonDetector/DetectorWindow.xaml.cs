@@ -27,7 +27,8 @@ namespace PersonDetector
             InitializeComponent();
             weightsFileLoaded = IOoperations.ReadWeightsFrom(Config.weightsFilePath);
             RefreshDebug();
-
+            lFirstPerson.Content = "";
+            lSecondPerson.Content = "";
         }
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
@@ -70,8 +71,12 @@ namespace PersonDetector
         private void btnDoMagic_Click(object sender, RoutedEventArgs e)
         {
             DataAnalytics.NormalizeData();
-            
-            //Config.allUsersNormalized
+            SudczakClassifier.Classify(Config.allUsersNormalized, Config.allUsersClassified, "FINAL");
+
+            Config.allUsersClassified= Config.allUsersClassified.OrderBy(u => u.probability).Reverse().ToList();
+
+            lFirstPerson.Content = Config.allUsersClassified[0].userName + " na " + Math.Round(Config.allUsersClassified[0].probability * 100,2) + "%";
+            lSecondPerson.Content = Config.allUsersClassified[1].userName + " na " + Math.Round(Config.allUsersClassified[1].probability * 100, 2) + "%";
         }
     }
 }

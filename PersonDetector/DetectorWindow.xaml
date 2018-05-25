@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="DetectorWindow" Height="357.313" Width="511.343">
+        Title="DetectorWindow" Height="503.223" Width="511.343">
     <Grid>
         <Button x:Name="btnLoadData" Content="Wczytaj dane" HorizontalAlignment="Left" Margin="31,38,0,0" VerticalAlignment="Top" Width="114" Height="30" Click="btnLoadData_Click"/>
         <Button x:Name="btnDoFinalTest" Content="Przeprowadź test" HorizontalAlignment="Left" Margin="181,38,0,0" VerticalAlignment="Top" Width="114" Height="30" Click="btnDoFinalTest_Click"/>
@@ -18,14 +18,34 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="lDesc1" Content="Poprawnie załadowane zestawy: " HorizontalAlignment="Left" Margin="73,108,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lDesc2" Content="Błędnie załadowane zestawy: " HorizontalAlignment="Left" Margin="89,139,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lLoadedSets" Content="0" HorizontalAlignment="Left" Margin="246,108,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lNotLoadedSets" Content="0" HorizontalAlignment="Left" Margin="246,139,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lDesc3" Content="Test końcowy wykonany:" HorizontalAlignment="Left" Margin="111,166,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lFinalTestDone" Content="Nie" HorizontalAlignment="Left" Margin="247,166,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lDesc4" Content="Plik z danymi klasyfikatora załadowany:" HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lWeightsLoaded" Content="Nie" HorizontalAlignment="Left" Margin="247,192,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc1" Content="Poprawnie załadowane zestawy: " HorizontalAlignment="Left" Margin="43,96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc2" Content="Błędnie załadowane zestawy: " HorizontalAlignment="Left" Margin="59,127,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lLoadedSets" Content="0" HorizontalAlignment="Left" Margin="216,96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lNotLoadedSets" Content="0" HorizontalAlignment="Left" Margin="216,127,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc3" Content="Test końcowy wykonany:" HorizontalAlignment="Left" Margin="81,154,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lFinalTestDone" Content="Nie" HorizontalAlignment="Left" Margin="217,154,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lDesc4" Content="Plik z danymi klasyfikatora załadowany:" HorizontalAlignment="Left" Margin="4,180,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lWeightsLoaded" Content="Nie" HorizontalAlignment="Left" Margin="217,180,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="WYNIKI BADANIA&#xD;&#xA;" HorizontalAlignment="Left" Margin="31,233,0,0" VerticalAlignment="Top" Height="79" Width="431" FontSize="48" FontFamily="Perpetua Titling MT">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="100" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FFF0C948" Offset="0"/>
+                    <GradientStop Color="#FFD564FF" Offset="1"/>
+                    <GradientStop Color="#FE63E24F" Offset="0.293"/>
+                    <GradientStop Color="#FE6DB6FF" Offset="0.565"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label x:Name="lFirstPerson" Content="Label" HorizontalAlignment="Left" Margin="71,312,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFB800B8" FontSize="20"/>
+        <Label x:Name="lSecondPerson" Content="Label" HorizontalAlignment="Left" Margin="75,349,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF0086B8" FontSize="14"/>
 
     </Grid>
 </Window>
