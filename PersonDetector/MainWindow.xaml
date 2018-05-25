@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="PersonDetector" Height="511.862" Width="649.328" AutomationProperties.Name="PersonDetectorWindow">
+        Title="PersonDetector - Test" Height="511.862" Width="649.328" AutomationProperties.Name="PersonDetectorWindow" ResizeMode="NoResize">
     <Grid Margin="0,0,0,-175">
         <Grid.RowDefinitions>
             <RowDefinition Height="365*"/>
@@ -15,12 +15,13 @@
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="92*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="357*"/>
-            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="275*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="186*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="labelSpeechNumber" Content="1&#xA;&#xA;" HorizontalAlignment="Left" Margin="186,1,0,0" VerticalAlignment="Top" Height="108" Width="125" FontSize="72" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="labelInfoText" Content="Tekst numer&#xA;" HorizontalAlignment="Left" Margin="1,27,0,0" VerticalAlignment="Top" Height="74" Width="402" FontSize="48" Grid.ColumnSpan="3" Grid.Column="1"/>
-        <Button x:Name="buttonNextSpeech" Content="Następny" HorizontalAlignment="Left" Margin="1.831,45,0,0" VerticalAlignment="Top" Width="137" FontSize="24" Height="56" Grid.Column="4" Click="buttonNextSpeech_Click"/>
+        <Label x:Name="labelSpeechNumber" Content="1&#xA;&#xA;" HorizontalAlignment="Left" Margin="186,1,0,0" VerticalAlignment="Top" Height="108" Width="125" FontSize="72" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelInfoText" Content="Tekst numer&#xA;" HorizontalAlignment="Left" Margin="1,27,0,0" VerticalAlignment="Top" Height="74" Width="402" FontSize="48" Grid.ColumnSpan="4" Grid.Column="1"/>
+        <Button x:Name="buttonNextSpeech" Content="Następny" HorizontalAlignment="Left" Margin="2,45,0,0" VerticalAlignment="Top" Width="137" FontSize="24" Height="56" Grid.Column="5" Click="buttonNextSpeech_Click"/>
         <Expander x:Name="expanderDebug" Grid.Column="1" Header="DebugInfo" Margin="10,304,0,0" VerticalAlignment="Top" Expanded="expanderDebug_Expanded" Collapsed="expanderDebug_Collapsed" IsExpanded="True" Height="28" Opacity="0.4" BorderThickness="0,1,1,1" FontSize="10">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
@@ -29,19 +30,19 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Expander>
-        <Label x:Name="LnewLinesPerText" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,324,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc2" Content="spacesAfterPunctuation" Margin="130,350,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="LspacesAfterPunctuation" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,350,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc3" Content="spacesBeforePunctuation" Margin="130,376,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="LspacesBeforePunctuation" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,376,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc4" Content="polishChars" Margin="130,401,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="LpolishChars" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,401,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc5" Content="avgLetterTime" Margin="130,427,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="LavgLetterTime" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,427,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc6" Content="avgCapitalLetterTime" Margin="130,453,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <Label x:Name="LavgCapitalLetterTime" Content="0" Grid.Column="3" HorizontalAlignment="Left" Margin="316,453,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
-        <Label x:Name="Ldesc1" Content="newLinesPerText" Margin="130,324,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3"/>
-        <TextBox x:Name="textBoxInput"   AcceptsReturn="True" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left" Height="198" Margin="3,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="621" FontSize="16" TextChanged="textBoxInput_TextChanged" KeyDown="textBoxInput_KeyDown" KeyUp="textBoxInput_KeyUp" Loaded="textBoxInput_Loaded">
+        <Label x:Name="LnewLinesPerText" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,324,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc2" Content="spacesAfterPunctuation" Margin="130,350,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="LspacesAfterPunctuation" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,350,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc3" Content="spacesBeforePunctuation" Margin="130,376,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="LspacesBeforePunctuation" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,376,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc4" Content="polishChars" Margin="130,401,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="LpolishChars" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,401,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc5" Content="avgLetterTime" Margin="130,427,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="LavgLetterTime" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,427,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc6" Content="avgCapitalLetterTime" Margin="130,453,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="LavgCapitalLetterTime" Content="0" Grid.Column="4" HorizontalAlignment="Left" Margin="41.172,453,0,0" VerticalAlignment="Top" Width="195" Grid.ColumnSpan="2"/>
+        <Label x:Name="Ldesc1" Content="newLinesPerText" Margin="130,324,0,0" VerticalAlignment="Top" Width="181" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontWeight="Bold" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxInput"   AcceptsReturn="True" Grid.ColumnSpan="5" Grid.Column="1" HorizontalAlignment="Left" Height="198" Margin="3,106,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="521" FontSize="18" TextChanged="textBoxInput_TextChanged" KeyDown="textBoxInput_KeyDown" KeyUp="textBoxInput_KeyUp" Loaded="textBoxInput_Loaded">
             <TextBox.Background>
                 <RadialGradientBrush >
                     <GradientStop Color="#FFE3EEFF" Offset="0"/>

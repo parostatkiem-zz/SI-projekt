@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="UserEndScreen" Height="309.611" Width="327.46" Closed="Window_Closed">
+        Title="PersonDetector - Koniec" Height="309.611" Width="327.46" Closed="Window_Closed" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="label" Content="Udało Ci się zakończyć wprowadzanie danych.&#xD;&#xA;Program stworzył plik nazwany Twoim imieniem,&#xD;&#xA;który należy dostarczyć zarządzającym projektem w &#xD;&#xA;umówiony sposób. &#xD;&#xA;&#xD;&#xA;Dziękujemy za udział w badaniu." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="113" Width="299"/>
         <Button x:Name="btnOpenFolder" Content="Otwórz lokalizację pliku" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="299" Height="47" Click="btnOpenFolder_Click">

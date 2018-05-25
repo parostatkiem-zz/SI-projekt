@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="DetectorWindow" Height="503.223" Width="511.343">
+        Title="PersonDetector - Magiczne okienko" Height="503.223" Width="511.343" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="btnLoadData" Content="Wczytaj dane" HorizontalAlignment="Left" Margin="31,38,0,0" VerticalAlignment="Top" Width="114" Height="30" Click="btnLoadData_Click"/>
         <Button x:Name="btnDoFinalTest" Content="Przeprowadź test" HorizontalAlignment="Left" Margin="181,38,0,0" VerticalAlignment="Top" Width="114" Height="30" Click="btnDoFinalTest_Click"/>

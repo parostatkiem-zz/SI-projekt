@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonDetector"
         mc:Ignorable="d"
-        Title="WelcomeScreen" Height="300" Width="300" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+        Title="PersonDetector - Witamy" Height="300" Width="300" Loaded="Window_Loaded" KeyDown="Window_KeyDown" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="57*"/>
