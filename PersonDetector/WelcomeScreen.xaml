@@ -12,7 +12,25 @@
             <ColumnDefinition Width="235*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="labelWelcomeText" Content="Witaj w programie Person Detector.&#xD;&#xA;Zostaniesz teraz podany(a) badaniu osobowości.&#xD;&#xA;Twoim zdaniem jest wpisywanie do programu&#xD;&#xA;czytanych na głos tekstów. Postaraj się zrobić to &#xD;&#xA;jak najbardziej naturalnie, nie zmieniając swoich&#xD;&#xA;nawyków pisania na potrzeby tego testu.&#xD;&#xA;Im lepiej Ci to wyjdzie, tym lepiej program będzie&#xD;&#xA;w stanie wykryć badaną osobę.&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Height="143" Width="272" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonStart" Content="Zaczynamy" HorizontalAlignment="Left" Margin="20.776,206,0,0" VerticalAlignment="Top" Width="135" Click="button_Click" Height="42" Grid.Column="1"/>
+        <Button x:Name="buttonStart" Content="Zaczynamy" HorizontalAlignment="Left" Margin="20.776,206,0,0" VerticalAlignment="Top" Width="135" Click="button_Click" Height="42" Grid.Column="1" FontSize="24" Foreground="Black" FontFamily="Agency FB">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="110" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF8A1CB4" Offset="0"/>
+                    <GradientStop Color="#FFF1C52F" Offset="1"/>
+                    <GradientStop Color="#FE5C6BC9" Offset="0.263"/>
+                    <GradientStop Color="#FE30CF9C" Offset="0.491"/>
+                    <GradientStop Color="#FE89DA38" Offset="0.75"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBox x:Name="textBoxNickname" HorizontalAlignment="Left" Height="23" Margin="50,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" ToolTip="Wprowadź swoje imię (max 25 znaków, poprawne jako nazwa pliku)" KeyDown="textBoxNickname_KeyDown" Grid.ColumnSpan="2"/>
         <Label x:Name="labelImie" Content="Imię:" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
 

@@ -101,7 +101,7 @@ namespace PersonDetector
         public static List<UserData> allUsersData = new List<UserData>();
         public static List<UserData> allUsersNormalized = new List<UserData>();
         public static List<UserData> allUsersClassified = new List<UserData>();
-        public static List<UserData> allUsersFinal = new List<UserData>();
+
         public static UserData currentUserData = new UserData();
         public static int SPEECH_AMOUNT = 3;
         public static int DEBUG_REFRESH_INTERVAL = 200;
