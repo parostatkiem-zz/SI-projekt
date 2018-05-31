@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AI\Classes.cs" />
     <Compile Include="DetectorWindow.xaml.cs">
       <DependentUpon>DetectorWindow.xaml</DependentUpon>
     </Compile>

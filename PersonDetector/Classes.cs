@@ -78,6 +78,11 @@ namespace PersonDetector
                 }
             }
         }
+
+        public double[] ToArray()
+        {
+            return new double[] {newLinesPerText,spacesAfterPunctuation,spacesBeforePunctuation,polishChars,avgLetterTime,avgCapitalLetterTime };
+        }
     }
 
     public class UserData
@@ -94,6 +99,11 @@ namespace PersonDetector
         {
             return inputs.Average(i => i[index]);
         }
+
+        public override string ToString()
+        {
+            return userName;
+        }
     }
 
     public static class Config
@@ -102,12 +112,15 @@ namespace PersonDetector
         public static List<UserData> allUsersNormalized = new List<UserData>();
         public static List<UserData> allUsersClassified = new List<UserData>();
 
+        public static AI.Data AIdata = new AI.Data();
+
         public static UserData currentUserData = new UserData();
         public static int SPEECH_AMOUNT = 3;
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
         public static DirectoryInfo saveFileDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"); //pulpit
         public static string weightsFilePath = "classifier_data.json";
+        public static string aiDataFilePath = "ai_data.json";
 
         public static string SavePath
         {
@@ -282,7 +295,6 @@ namespace PersonDetector
 
     public static class IOoperations
     {
-        
         public static bool SerializeToJson()
         {
             try
@@ -321,6 +333,47 @@ namespace PersonDetector
             }
             catch { return false; }
         }
+
+        public static bool AIdataToJSON(string actualRightUsername)
+        {
+            double isRight = 0;
+            List<double> tmp = new List<double>();
+            foreach(UserData d in Config.allUsersNormalized)
+            {
+                tmp.Clear();
+                isRight = 0;
+                if (d.userName == "FINAL") continue;
+                if (d.userName == actualRightUsername) isRight = 1;
+                tmp.AddRange(d.inputs[0].ToArray());
+                tmp.AddRange(Config.allUsersNormalized.First(u=>u.userName=="FINAL").inputs[0].ToArray());
+                tmp.Add(isRight);
+                Config.AIdata.Entries.Add(tmp.ToArray());
+            }
+
+          
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(Config.aiDataFilePath))
+                {
+                    sw.Write(JsonConvert.SerializeObject(Config.AIdata));
+                }
+
+            }
+            catch { return false; }
+            return true;
+        }
+
+        public static bool AIdataFromJSON(string path)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(path)) return false;
+               Config.AIdata = JsonConvert.DeserializeObject<AI.Data>(File.ReadAllText(path));
+                return true;
+            }
+            catch { return false; }
+        }
+
     }
 
 

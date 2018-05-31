@@ -29,6 +29,9 @@ namespace PersonDetector
             RefreshDebug();
             lFirstPerson.Content = "";
             lSecondPerson.Content = "";
+            lDesc5.Visibility = Visibility.Collapsed;
+            listBoxNames.Visibility = Visibility.Collapsed;
+            IOoperations.AIdataFromJSON(Config.aiDataFilePath);
         }
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
@@ -70,6 +73,7 @@ namespace PersonDetector
 
         private void btnDoMagic_Click(object sender, RoutedEventArgs e)
         {
+            if (Config.allUsersData.Where(p => p.userName == "FINAL").Count() <= 0) return;
             DataAnalytics.NormalizeData();
             SudczakClassifier.Classify(Config.allUsersNormalized, Config.allUsersClassified, "FINAL");
 
@@ -77,6 +81,35 @@ namespace PersonDetector
 
             lFirstPerson.Content = Config.allUsersClassified[0].userName + " na " + Math.Round(Config.allUsersClassified[0].probability * 100,2) + "%";
             lSecondPerson.Content = Config.allUsersClassified[1].userName + " na " + Math.Round(Config.allUsersClassified[1].probability * 100, 2) + "%";
+
+            listBoxNames.Items.Clear();
+
+            foreach(UserData d in Config.allUsersClassified)
+            {
+                listBoxNames.Items.Add(d);
+            }
+
+            lDesc5.Visibility = Visibility.Visible;
+            listBoxNames.Visibility = Visibility.Visible;
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                string actualRightPerson = listBoxNames.SelectedItem.ToString();
+                if (actualRightPerson == null) return;
+
+                IOoperations.AIdataToJSON(actualRightPerson);
+
+            }
+            catch { }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
