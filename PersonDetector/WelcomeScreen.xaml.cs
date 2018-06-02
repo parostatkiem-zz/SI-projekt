@@ -61,7 +61,7 @@ namespace PersonDetector
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.L)
+            if (e.Key==Key.L && !textBoxNickname.IsFocused)
             {
                 DetectorWindow m = new DetectorWindow();
                 m.Show();

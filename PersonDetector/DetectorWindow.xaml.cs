@@ -74,13 +74,24 @@ namespace PersonDetector
         private void btnDoMagic_Click(object sender, RoutedEventArgs e)
         {
             if (Config.allUsersData.Where(p => p.userName == "FINAL").Count() <= 0) return;
-            DataAnalytics.NormalizeData();
-            SudczakClassifier.Classify(Config.allUsersNormalized, Config.allUsersClassified, "FINAL");
 
-            Config.allUsersClassified= Config.allUsersClassified.OrderBy(u => u.probability).Reverse().ToList();
+            if(Config.USE_NEURAL)
+            {
+                //metoda z użyciem pythona, sieci neuronowych itp
+                IOoperations.AppendAllUserEntries(Config.userEntriesPath);
+                lFirstPerson.Content = IOoperations.GetPythonOutput();
+            }
+            else
+            {
+                //standardowa metoda przewidywania
+                DataAnalytics.NormalizeData();
+                SudczakClassifier.Classify(Config.allUsersNormalized, Config.allUsersClassified, "FINAL");
 
-            lFirstPerson.Content = Config.allUsersClassified[0].userName + " na " + Math.Round(Config.allUsersClassified[0].probability * 100,2) + "%";
-            lSecondPerson.Content = Config.allUsersClassified[1].userName + " na " + Math.Round(Config.allUsersClassified[1].probability * 100, 2) + "%";
+                Config.allUsersClassified = Config.allUsersClassified.OrderBy(u => u.probability).Reverse().ToList();
+
+                lFirstPerson.Content = Config.allUsersClassified[0].userName + " na " + Math.Round(Config.allUsersClassified[0].probability * 100, 2) + "%";
+                lSecondPerson.Content = Config.allUsersClassified[1].userName + " na " + Math.Round(Config.allUsersClassified[1].probability * 100, 2) + "%";
+            }
 
             listBoxNames.Items.Clear();
 
@@ -88,10 +99,6 @@ namespace PersonDetector
             {
                 listBoxNames.Items.Add(d);
             }
-
-            lDesc5.Visibility = Visibility.Visible;
-            listBoxNames.Visibility = Visibility.Visible;
-
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

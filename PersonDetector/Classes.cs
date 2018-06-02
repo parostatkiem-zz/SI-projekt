@@ -9,6 +9,7 @@ using System.Timers;
 
 using Newtonsoft.Json;
 using System.Reflection;
+using System.Globalization;
 
 namespace PersonDetector
 {
@@ -83,6 +84,13 @@ namespace PersonDetector
         {
             return new double[] {newLinesPerText,spacesAfterPunctuation,spacesBeforePunctuation,polishChars,avgLetterTime,avgCapitalLetterTime };
         }
+
+        public override string ToString()
+        {
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            return newLinesPerText.ToString(nfi)+" "+ spacesAfterPunctuation.ToString(nfi) + " " + spacesBeforePunctuation.ToString(nfi) + " " + polishChars.ToString(nfi) + " " + avgLetterTime.ToString(nfi) + " " + avgCapitalLetterTime.ToString(nfi);
+        }
     }
 
     public class UserData
@@ -118,9 +126,12 @@ namespace PersonDetector
         public static int SPEECH_AMOUNT = 3;
         public static int DEBUG_REFRESH_INTERVAL = 200;
         public static bool IS_DEBUG_ENABLED = false;
+        public static bool USE_NEURAL = true;
+
         public static DirectoryInfo saveFileDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"); //pulpit
         public static string weightsFilePath = "classifier_data.json";
         public static string aiDataFilePath = "ai_data.json";
+        public static string userEntriesPath = "user_probes.data";
 
         public static string SavePath
         {
@@ -374,7 +385,53 @@ namespace PersonDetector
             catch { return false; }
         }
 
-    }
+        public static bool AppendAllUserEntries(string path)
+        {
+            try
+            {
+                foreach(UserData u in Config.allUsersData)
+                {
+                    if (u.userName == "FINAL") continue;
+                    foreach(SingleInput input in u.inputs)
+                    {
+                        File.AppendAllText(path, input.ToString() +" "+u.userName + Environment.NewLine);
+                    }
+                }
+               
+                return true;
+            }
+            catch { return false; }
+        }
+
+
+        public static string GetPythonOutput()
+        {
+            Process cmd = new Process();
+            cmd.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+
+            cmd.StandardInput.WriteLine("python project.py "+ Config.allUsersData.First(p => p.userName == "FINAL").inputs[0].ToString());
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+
+            List<string> lines= new List<string>();
+            using (StringReader reader = new StringReader(cmd.StandardOutput.ReadToEnd()))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+            }
+            return lines[lines.Count-3];
+        }
+}
 
 
     public static class SudczakClassifier
